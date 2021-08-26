@@ -21,7 +21,7 @@
 #	Copyright 2016-2021 Robert Gallup 
 #
 
-import sys, array, os, textwrap, math, random, argparse
+import sys, array, os, textwrap, argparse
 
 class DEFAULTS(object):
 	VERSION = '1.0.0'
@@ -37,6 +37,7 @@ def main ():
 	parser = argparse.ArgumentParser()
 	parser.add_argument ("infile", help="The BMP file(s) to convert", type=argparse.FileType('r'), nargs='*', default=['-'])
 	parser.add_argument ("-p", "--pgm_start", help="Sets initial program counter to \"n\",  (default: 4)", metavar="n", default=4)
+	parser.add_argument ("-r", "--raw", help="Outputs data without the filename header", action="store_false")
 	parser.add_argument ("-v", "--version", help="Returns the current bmp2hex version", action="store_true")
 	args = parser.parse_args()
 
@@ -51,6 +52,8 @@ def main ():
 		if f == '-':
 			sys.exit()
 		else:
+			if args.raw == True:
+				print("\n" + f.name)
 			bin2txt(f.name, tablewidth, program_start)
 
 # Main conversion function
