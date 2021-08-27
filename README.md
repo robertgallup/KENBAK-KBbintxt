@@ -25,9 +25,9 @@ $ python KBbin2txt.py [-h] [-p N] [-r] [-s] [-v] infile
 ### Where:
 
 *-h, \-\-help* : Help<br />
-*-p N, \-\-*pgm_start : Sets the byte number for the start of the program<br />
+*-p N, \-\-pgm_start* : Sets the byte number for the start of the program<br />
 *-r, \-\-raw* : Output just the octal bytes without file name header<br />
-*-s, \-\-*strip : Strips trailing zeros from the listing and terminates with an "e"<br />
+*-s, \-\-strip* : Strips trailing zeros from the listing and terminates with an "e"<br />
 *-v, \-\-version* : Displays the bmp2hex version<br />
 <br />
 *infile* : Path to input .bmp file. May use a list or wild cards for multiple files<br />
