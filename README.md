@@ -1,4 +1,4 @@
-KBbin2txt - Converts KENBAK-1 .bin files to text
+## KBbintxt - Converts KENBAK-1 .bin files to text
 
 ```
 Author:    		Robert Gallup (bg@robertgallup.com)
@@ -8,18 +8,18 @@ Compatability:		Python 3
 Version:		1.0.0
 ```
 
-### KBbin2txt Overview
+### KBbintxt Overview
 
-KBbin2txt is a command line utility, written in Python, that outputs a comma-separated list of octal values representing the data from a .bin file representing the 256-byte memory contents of a KENBAK-1 program. 
+KBbintxt is a command line utility, written in Python, that outputs a comma-separated list of octal values representing the data from a .bin file representing the 256-byte memory contents of a KENBAK-1 program. 
 
 The primary purpose is to convert the output from assembler-generated .bin file to a text format that can be uploaded through a serial connection to a KENBAK-1 emulator running Mark Wilson's firmware (http://funnypolynomial.com/software/arduino/kenbak.html)
 
-Output from KBbin2txt.py is directed to **standard output**. You can redirect it to a file, or use cut/paste to transfer the output to the KENBAK through a serial monitor.
+Output from KBbintxt.py is directed to **standard output**. You can redirect it to a file, or use cut/paste to transfer the output to the KENBAK through a serial monitor.
 
 ### The command line is:
 
 ``` bash
-$ python KBbin2txt.py [-h] [-p N] [-r] [-s] [-v] infile
+$ python KBbintxt.py [-h] [-p N] [-r] [-s] [-v] infile
 ```
 
 ### Where:
