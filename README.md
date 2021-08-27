@@ -4,19 +4,17 @@
 Author:    		Robert Gallup (bg@robertgallup.com)
 Date:      		August 26, 2021
 License:   		MIT Opensource License (see license.txt) 
-Compatability: 	Python 3
+Compatability:		Python 3
 Version:		1.0.0
 ```
 
 ### KBbin2txt Overview
 
-Command line Python utility to output a table of hex values representing the size and data from a .bmp graphics file. This would typically be used to create graphics for display by a microprocessor, say an Arduino, on an OLED or LCD.
+KBbin2txt is a command line utility, written in Python, that outputs a comma-separated list of octal values representing the data from a .bin file representing the 256-byte memory contents of a KENBAK-1 program. 
 
-The *input* is a .bmp file. Windows format 1-bit, grayscale (8-bit), and color (16-bit) bitmaps are known to work.
+The primary purpose is to convert the output from assembler-generated .bin file to a text format that can be uploaded through a serial connection to a KENBAK-1 emulator running Mark Wilson's firmware (http://funnypolynomial.com/software/arduino/kenbak.html)
 
-The *output* is a valid C structure variable definition with meta data for image width and height. A _raw_ format is also supported with the image data defined as an array of const unsigned char. Since bitmaps can take a significant number of bytes, the PROGMEM keyword is used to place data in program memory, rather than on the stack.
-
-Results from bmp2hex.py are directed to **standard output**. You can redirect them to a file, or use cut/paste to transfer the output to your code.
+Output from KBbin2txt.py is directed to **standard output**. You can redirect it to a file, or use cut/paste to transfer the output to the KENBAK through a serial monitor.
 
 ### The command line is:
 

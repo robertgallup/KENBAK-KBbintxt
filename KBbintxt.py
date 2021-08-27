@@ -26,19 +26,26 @@ import sys, array, os, textwrap, argparse
 class DEFAULTS(object):
 	VERSION = '1.0.0'
 
+# Returns index of last non-zero value in list v
+def last_non_zero(values):
+	l = -1
+	for i, v in enumerate(values):
+		if v != 0:
+			l = i
+	return(l)
+
 def main ():
 
 	# Default parameters
-	infile = ""
 	tablewidth = 16
-	version = False
 
 	# Set up parser and handle arguments
 	parser = argparse.ArgumentParser()
 	parser.add_argument ("infile", help="The BMP file(s) to convert", type=argparse.FileType('r'), nargs='*', default=['-'])
 	parser.add_argument ("-p", "--pgm_start", help="Sets initial program counter to \"n\",  (default: 4)", metavar="n", default=4)
-	parser.add_argument ("-r", "--raw", help="Outputs data without the filename header", action="store_false")
-	parser.add_argument ("-v", "--version", help="Returns the current bmp2hex version", action="store_true")
+	parser.add_argument ("-r", "--raw", help="Outputs data without the filename header", action="store_true")
+	parser.add_argument ("-s", "--strip", help="Strips trailing zero bytes from output and terminates with an \"e\"", action="store_true")
+	parser.add_argument ("-v", "--version", help="Returns the current version", action="store_true")
 	args = parser.parse_args()
 
 	# Options
@@ -52,14 +59,14 @@ def main ():
 		if f == '-':
 			sys.exit()
 		else:
-			if args.raw == True:
+			if not args.raw:
 				print("\n" + f.name)
-			bin2txt(f.name, tablewidth, program_start)
+			bin2txt(f.name, tablewidth, program_start, args.strip)
 
 # Main conversion function
-def bin2txt(infile, tablewidth, program_counter):
+def bin2txt(infile, tablewidth, program_counter, strip):
 	# Convert tablewidth to octal/hex characters
-	tablewidth = int(tablewidth) * 4
+	tablewidth = int(tablewidth) * 5
 
 	# Initilize output buffer
 	outstring =  ''
@@ -76,6 +83,18 @@ def bin2txt(infile, tablewidth, program_counter):
 	# Get bytes from file
 	values=valuesfromfile.tolist()
 
+	tail = ""
+	if strip:
+		last = last_non_zero(values)
+		if last < 255:
+			tail = "e"
+
+		if last < 0:
+			values = []
+		else:
+			values = values[:last+1]
+
+
 	# Set initial program counter (only if original is zero)
 	if values[3] == 0:
 		values[3] = int(program_counter)
@@ -83,12 +102,12 @@ def bin2txt(infile, tablewidth, program_counter):
 	# Generate bytes for data in output buffer
 	try:
 		for v in values:
-			outstring += ("{0:#05o}".format(v) + ",")[2:]
+			outstring += ("{0:#06o}".format(v) + ",")[2:]
 
 	# Wrap the output buffer. Print. Then, finish.
 	finally:
 		outstring = textwrap.fill(outstring, tablewidth)
-		print (outstring)
+		print (outstring+tail)
 
 # Only run if launched from command line
 if __name__ == '__main__': main()
