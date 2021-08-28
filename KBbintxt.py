@@ -42,7 +42,7 @@ def main ():
 	# Set up parser and handle arguments
 	parser = argparse.ArgumentParser()
 	parser.add_argument ("infile", help="The BMP file(s) to convert", type=argparse.FileType('r'), nargs='*', default=['-'])
-	parser.add_argument ("-p", "--pgm_start", help="Sets initial program counter to \"n\",  (default: 4)", metavar="n", default=4)
+	parser.add_argument ("-p", "--pgm_start", help="Sets initial program counter to \"n\"", metavar="n", type=int, action="store")
 	parser.add_argument ("-r", "--raw", help="Outputs data without the filename header", action="store_true")
 	parser.add_argument ("-s", "--strip", help="Strips trailing zero bytes from output and terminates with an \"e\"", action="store_true")
 	parser.add_argument ("-v", "--version", help="Returns the current version", action="store_true")
@@ -95,8 +95,8 @@ def bin2txt(infile, tablewidth, program_counter, strip):
 			values = values[:last+1]
 
 
-	# Set initial program counter (only if original is zero)
-	if values[3] == 0:
+	# Set initial program counter, if specified
+	if (program_counter is not None):
 		values[3] = int(program_counter)
 
 	# Generate bytes for data in output buffer
