@@ -65,16 +65,14 @@ Fibonacci.bin
 ### Example:
 
 ``` bash
-$ python3 KBbintxt.py -s Fibonacci.bin
+$ python3 KBbintxt.py -s -r Fibonacci.bin
 ```
 
-Process the file *Fibonacci.bin*. Display the binary data as octal bytes, stripping zero bytes from the end.
+Process the file *Fibonacci.bin*. Display the binary data as octal bytes, strip zero bytes from the end, and don't print the filename.
 
 ### Output:
 
 ```
-
-Fibonacci.bin
 0000,0000,0000,0004,0023,0000,0034,0036,0023,0001,0034,0037,0233,0000,0026,0036,
 0006,0037,0212,0201,0200,0000,0036,0040,0034,0200,0203,0001,0347,0016,e
 ```
