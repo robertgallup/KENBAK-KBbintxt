@@ -23,8 +23,13 @@
 
 import sys, array, os, textwrap, argparse
 
-class DEFAULTS(object):
-	VERSION = '1.0.0'
+class settings(object):
+	version = "1.0.0"
+	table_width = 16
+	programm_start = None
+	raw = False
+	strip = False
+	hex_format = False
 
 # Returns index of last non-zero value in list v
 def last_non_zero(values):
@@ -36,23 +41,23 @@ def last_non_zero(values):
 
 def main ():
 
-	# Default parameters
-	tablewidth = 16
-
 	# Set up parser and handle arguments
 	parser = argparse.ArgumentParser()
 	parser.add_argument ("infile", help="The BMP file(s) to convert", type=argparse.FileType('r'), nargs='*', default=['-'])
-	parser.add_argument ("-p", "--pgm_start", help="Sets initial program counter to \"n\"", metavar="n", type=int, action="store")
+	parser.add_argument ("-p", "--program_start", help="Sets initial program counter to \"n\"", metavar="n", type=int, action="store")
+	parser.add_argument ("-x", "--hex_format", help="Outputs hexidecimal numbers rather than octal", action="store_true")
 	parser.add_argument ("-r", "--raw", help="Outputs data without the filename header", action="store_true")
 	parser.add_argument ("-s", "--strip", help="Strips trailing zero bytes from output and terminates with an \"e\"", action="store_true")
 	parser.add_argument ("-v", "--version", help="Returns the current version", action="store_true")
 	args = parser.parse_args()
 
 	# Options
-	program_start = args.pgm_start
+	settings.program_start = args.program_start
+	settings.strip = args.strip
+	settings.hex_format = args.hex_format
 
 	if args.version:
-		print ('version ' + DEFAULTS.VERSION)
+		print ('Version: ' + settings.version)
 
 	# Do the work
 	for f in args.infile:
@@ -61,12 +66,10 @@ def main ():
 		else:
 			if not args.raw:
 				print("\n" + f.name)
-			bin2txt(f.name, tablewidth, program_start, args.strip)
+			bin2txt(f.name, settings)
 
 # Main conversion function
-def bin2txt(infile, tablewidth, program_counter, strip):
-	# Convert tablewidth to octal/hex characters
-	tablewidth = int(tablewidth) * 5
+def bin2txt(infile, settings):
 
 	# Initilize output buffer
 	outstring =  ''
@@ -84,7 +87,7 @@ def bin2txt(infile, tablewidth, program_counter, strip):
 	values=valuesfromfile.tolist()
 
 	tail = ""
-	if strip:
+	if settings.strip:
 		last = last_non_zero(values)
 		if last < 255:
 			tail = "e"
@@ -94,19 +97,22 @@ def bin2txt(infile, tablewidth, program_counter, strip):
 		else:
 			values = values[:last+1]
 
-
 	# Set initial program counter, if specified
-	if (program_counter is not None):
-		values[3] = int(program_counter)
+	if (settings.program_start is not None):
+		values[3] = int(settings.program_start)
 
 	# Generate bytes for data in output buffer
 	try:
 		for v in values:
-			outstring += ("{0:#06o}".format(v) + ",")[2:]
+			outstring += (("{0:#06o}".format(v))[2:] if not settings.hex_format else "0x" + ("{0:#05X}".format(v))[2:]) + ","
 
 	# Wrap the output buffer. Print. Then, finish.
 	finally:
-		outstring = textwrap.fill(outstring, tablewidth)
+
+#		# Convert tablewidth to octal/hex characters
+#		tablewidth = int(settings.table_width) * (5 if not settings.hex_format else 6)
+
+		outstring = textwrap.fill(outstring, int(settings.table_width) * (5 if not settings.hex_format else 6))
 		print (outstring+tail)
 
 # Only run if launched from command line
