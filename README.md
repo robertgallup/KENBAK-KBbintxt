@@ -25,7 +25,7 @@ $ python KBbintxt.py [-h] [-p N] [-r] [-s] [-x] [-v] infile
 ### Where:
 
 *-h, \-\-help* : Help<br />
-*-p N, \-\-pgm_start* : Sets the byte number for the start of the program<br />
+*-p N, \-\-program_start* : Sets the byte number for the start of the program<br />
 *-r, \-\-raw* : Outputs just numeric bytes without file name header<br />
 *-s, \-\-strip* : Strips trailing zeros from the listing and terminates with an "e"<br />*-x, \-\-hex_format* : Outputs numbers in hexadecimal rather than octal<br />*-v, \-\-version* : Outputs version information<br />
 <br />
