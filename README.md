@@ -12,9 +12,9 @@ Version:		1.0.0
 
 KBbintxt is a command line utility, written in Python, that outputs a comma-separated list of octal values representing the data from a .bin file representing the 256-byte memory contents of a KENBAK-1 program. 
 
-The primary purpose is to convert the output from assembler-generated .bin file to a text format that can be uploaded through a serial connection to a KENBAK-1 emulator running Mark Wilson's firmware (http://funnypolynomial.com/software/arduino/kenbak.html)
+The primary purpose is to convert the output from assembler-generated .bin files to a text format that can be uploaded through serial connection to a KENBAK-1 emulator running Mark Wilson's firmware (http://funnypolynomial.com/software/arduino/kenbak.html)
 
-Output from KBbintxt.py is directed to **standard output**. You can redirect it to a file, or use cut/paste to transfer the output to the KENBAK through a serial monitor.
+Output from KBbintxt.py is directed to standard output. You can redirect it to a file, or use cut/paste from the terminal window to transfer the output to the KENBAK through a serial monitor.
 
 ### The command line is:
 
