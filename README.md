@@ -34,17 +34,17 @@ $ python KBbintxt.py [-h] [-p N] [-r] [-s] [-v] infile
 ### Example:
 
 ``` bash
-$ python3 KBbintxt.py Fibonacci.bin
+$ python3 KBbintxt.py blink.bin
 ```
-Process the file *Fibonacci.bin*. Display the binary data as octal bytes
+Process the file *blink.bin*. Display all 256 bytes as in octal format.
 
 ### Output:
 
 ```
 
-Fibonacci.bin
-0000,0000,0000,0004,0023,0000,0034,0036,0023,0001,0034,0037,0233,0000,0026,0036,
-0006,0037,0212,0201,0200,0000,0036,0040,0034,0200,0203,0001,0347,0016,0000,0000,
+blink.bin
+0000,0000,0000,0004,0023,0252,0034,0200,0334,0000,0013,0001,0223,0277,0367,0022,
+0043,0006,0000,0213,0001,0243,0023,0357,0022,0000,0000,0000,0000,0000,0000,0000,
 0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,
 0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,
 0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,
@@ -60,19 +60,38 @@ Fibonacci.bin
 0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,
 0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,0000,
 ```
+
+
 
 ### Example:
 
 ``` bash
-$ python3 KBbintxt.py -s -r Fibonacci.bin
+$ python3 KBbintxt.py -s -r blink.bin
 ```
 
-Process the file *Fibonacci.bin*. Display the binary data as octal bytes, strip zero bytes from the end, and don't print the filename.
+Process the file *blink.bin*. Display bytes in octal format, strip zero bytes from the end, and print only raw data (not the file name).
 
 ### Output:
 
 ```
-0000,0000,0000,0004,0023,0000,0034,0036,0023,0001,0034,0037,0233,0000,0026,0036,
-0006,0037,0212,0201,0200,0000,0036,0040,0034,0200,0203,0001,0347,0016,e
+0000,0000,0000,0004,0023,0252,0034,0200,0334,0000,0013,0001,0223,0277,0367,0022,
+0043,0006,0000,0213,0001,0243,0023,0357,0022,e
+```
+
+
+
+### Example:
+
+``` bash
+$ python3 KBbintxt.py -s -r -x blink.bin
+```
+
+Process the file *blink.bin*. Display bytes in hexadecimal format, strip zero bytes from the end, and print only raw data (not the file name).
+
+### Output:
+
+```
+0x000,0x000,0x000,0x004,0x013,0x0AA,0x01C,0x080,0x0DC,0x000,0x00B,0x001,0x093,0x0BF,0x0F7,0x012,
+0x023,0x006,0x000,0x08B,0x001,0x0A3,0x013,0x0EF,0x012,e
 ```
 
