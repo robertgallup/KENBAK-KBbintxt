@@ -29,14 +29,14 @@ $ python KBbintxt.py [-h] [-p N] [-r] [-s] [-v] infile
 *-r, \-\-raw* : Outputs just numeric bytes without file name header<br />
 *-s, \-\-strip* : Strips trailing zeros from the listing and terminates with an "e"<br />*-x, \-\-hex_format* : Outputs numbers in hexadecimal rather than octal<br />*-v, \-\-version* : Outputs version information<br />
 <br />
-*infile* : Path to input .bmp file. May use a list or wild cards for multiple files<br />
+*infile* : Path to input file. May use a list or wild cards for multiple files<br />
 
 ### Example:
 
 ``` bash
 $ python3 KBbintxt.py blink.bin
 ```
-Process the file *blink.bin*. Display all 256 bytes as in octal format.
+Process the file *blink.bin*. Display all 256 bytes in octal format.
 
 ### Output:
 
