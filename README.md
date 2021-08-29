@@ -19,7 +19,7 @@ Output from KBbintxt.py is directed to standard output. You can redirect it to a
 ### The command line is:
 
 ``` bash
-$ python KBbintxt.py [-h] [-p N] [-r] [-s] [-v] infile
+$ python KBbintxt.py [-h] [-p N] [-r] [-s] [-x] [-v] infile
 ```
 
 ### Where:
